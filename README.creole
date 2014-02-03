@@ -1,0 +1,40 @@
+= Pipes =
+
+Unix pipes are a powerful tool. In Emacs we don't have much support
+for them so this package aims to add such support.
+
+== API ==
+
+The Pipe API consists of a few functions and macros to spawn
+processes and communicate with them in the Pipe style.
+
+=== pipe ===
+
+A macro allowing piping to be represented simply:
+
+{{{
+(pipe "ls -la"
+  (catch :eof
+    (with-current-buffer somebuf
+      (-each
+       (->> (pipe-read)
+         (-keep (lambda (a) a)))
+       (lambda (x) (print x)))
+}}}
+
+{{{pipe}}} takes a command as a string and a body of code which is
+executed with {{{(pipe-read)}}} providing a line from the command.
+
+=== pipe-eof proc ===
+
+Has //proc// been marked EOF?
+
+
+=== pipe-shell-command command thunk &optional name ===
+
+Pipe the shell //command// to the //thunk// function.
+
+Within //thunk// the function [[pipe]] is bound to take it's function
+argument and apply it to [[args]].
+
+
