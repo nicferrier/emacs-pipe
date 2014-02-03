@@ -163,15 +163,6 @@ thrown."
       (apply 'maildir/update (pipe-read)))))
 
 
-(let (collect)
-  (wait-for-pipe-eof
-      (pipe "ls -la ~/work"
-        (catch :eof
-          (-each 
-           (->> (pipe-read)
-             (-keep (lambda (a) a)))
-           (lambda (a) (push a collect)))))
-    collect))
 
 (provide 'pipe)
 

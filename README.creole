@@ -34,7 +34,6 @@ Has //proc// been marked EOF?
 
 Pipe the shell //command// to the //thunk// function.
 
-Within //thunk// the function [[pipe]] is bound to take it's function
-argument and apply it to [[args]].
-
+Within //thunk// the function {{{pipe-read}}} is bound to deliver
+whatever came over the pipe.
 
